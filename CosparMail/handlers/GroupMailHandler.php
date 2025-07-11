@@ -300,6 +300,7 @@ class GroupMailHandler
     {
         global $conn;
 
+        // FIXED: Removed the non-existent gm.created_by column reference
         $stmt = $conn->prepare("
             SELECT gc.id, gc.name as filter_signature, gc.created_at, gc.updated_at,
                    COUNT(gm.id) as email_count,

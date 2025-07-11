@@ -6,7 +6,9 @@
  */
 
 // Define constant to prevent direct access to templates
-define('COSPAR_MAIL', true);
+if (!defined('COSPAR_MAIL')) {
+    define('COSPAR_MAIL', true);
+}
 
 /**
  * Retrieves and displays email history sent by the current user to an author
@@ -80,6 +82,16 @@ function getEmailHistory($authorId)
 }
 
 /**
+ * Alias function for AjaxHandler compatibility
+ * 
+ * @param int $authorId The ID of the author
+ */
+function getEmailHistoryForAuthor($authorId)
+{
+    return getEmailHistory($authorId);
+}
+
+/**
  * Format a timestamp as a "time ago" string
  * 
  * @param int $seconds Number of seconds ago
@@ -103,3 +115,4 @@ function formatTimeAgo($seconds, $formattedDate)
         return $formattedDate; // Just use the full date for older emails
     }
 }
+?>
