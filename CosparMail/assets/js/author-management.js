@@ -34,17 +34,6 @@ function displayRightSectionForAuthor(authorId, authorName, authorEmail) {
     if (recipientEmailField) recipientEmailField.value = authorEmail;
     if (bulkEmailField) bulkEmailField.value = "false";
 
-    // **NEW: Hide the group conversation manager**
-    if (typeof hideGroupConversationManager === 'function') {
-        hideGroupConversationManager();
-    }
-
-    // Show individual email history
-    const emailHistorySection = document.querySelector('.email-history-section');
-    if (emailHistorySection) {
-        emailHistorySection.style.display = 'block';
-    }
-
     // Load email history for this author
     loadEmailHistory(authorId, 'author');
 
@@ -55,44 +44,36 @@ function displayRightSectionForAuthor(authorId, authorName, authorEmail) {
  * Display right section for all visible authors (bulk email)
  */
 function displayRightSectionForAll() {
-    console.log("Displaying right section for all visible authors (bulk email)");
-
+    console.log("Displaying right section for all authors (bulk mode)");
+    
     // Show the right section
     const rightSection = document.getElementById('rightSection');
     if (rightSection) {
         rightSection.style.display = 'block';
     }
 
-    // Update author information for bulk mode
+    // Update header for bulk mode
     const authorNameSpan = document.getElementById('authorName');
-    const visibleCount = getVisibleAuthorIds().length;
     if (authorNameSpan) {
+        const visibleCount = getVisibleAuthorIds().length;
         authorNameSpan.textContent = `All Filtered Authors (${visibleCount} recipients)`;
     }
 
-    // Set form fields for bulk email
+    // Set hidden form fields for bulk email
     const recipientIdField = document.getElementById('recipient_id');
     const recipientNameField = document.getElementById('recipient_name');
     const recipientEmailField = document.getElementById('recipient_email');
     const bulkEmailField = document.getElementById('bulk_email');
 
     if (recipientIdField) recipientIdField.value = '';
-    if (recipientNameField) recipientNameField.value = 'All Authors';
+    if (recipientNameField) recipientNameField.value = 'All Filtered Authors';
     if (recipientEmailField) recipientEmailField.value = '';
     if (bulkEmailField) bulkEmailField.value = "true";
 
-    // **NEW: Show the group conversation manager**
-    if (typeof showGroupConversationManager === 'function') {
-        showGroupConversationManager();
-    }
+    // Load group email history
+    loadEmailHistory('all_authors', 'group');
 
-    // Hide individual email history, show group management
-    const emailHistorySection = document.querySelector('.email-history-section');
-    if (emailHistorySection) {
-        emailHistorySection.style.display = 'none';
-    }
-
-    console.log("Right section displayed for bulk email with conversation manager");
+    console.log("Right section displayed for bulk email mode");
 }
 
 /**

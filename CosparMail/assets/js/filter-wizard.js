@@ -1,7 +1,7 @@
 /**
- * COSPAR Mail System - Filter Wizard (Fixed Clear Filters Bug)
+ * COSPAR Mail System - Filter Wizard (Cleaned Version)
  * 
- * Fixed issue where filter indicator count wasn't resetting to 0 after clearing all filters
+ * Handles the step-by-step filtering process for authors
  */
 
 class FilterWizard {
@@ -15,17 +15,20 @@ class FilterWizard {
         };
         this.isOpen = false;
         this.createModal();
-        this.setupClearFiltersButton();
     }
 
+    /**
+     * Creates the filter wizard modal HTML and inserts it into the DOM
+     * This builds the entire 4-step wizard interface dynamically
+     */
     createModal() {
-        // Remove existing modal if present
+        // Remove existing modal if present (prevents duplicates)
         const existingModal = document.getElementById('filterWizardModal');
         if (existingModal) {
             existingModal.remove();
         }
 
-        // Create modal HTML
+        // Create complete modal HTML with all 4 steps
         const modalHTML = `
             <div id="filterWizardModal" class="filter-wizard-modal" style="display: none;">
                 <div class="filter-wizard-content">
@@ -183,23 +186,14 @@ class FilterWizard {
             </div>
         `;
 
-        // Insert modal into body
+        // Insert modal into the page
         document.body.insertAdjacentHTML('beforeend', modalHTML);
     }
-
-    setupClearFiltersButton() {
-        // Set up event listener for clear filters button
-        // This will be called when the DOM is ready
-        document.addEventListener('DOMContentLoaded', () => {
-            const clearFiltersBtn = document.querySelector('.clear-filters-btn');
-            if (clearFiltersBtn) {
-                clearFiltersBtn.addEventListener('click', () => {
-                    this.clearAllFilters();
-                });
-            }
-        });
-    }
-
+    
+    /**
+     * Opens the filter wizard modal
+     * Resets to step 1 and shows the modal
+     */
     open() {
         console.log('Opening filter wizard');
         this.isOpen = true;
@@ -208,12 +202,20 @@ class FilterWizard {
         this.updateStepDisplay();
     }
 
+    /**
+     * Closes the filter wizard modal
+     * Simply hides the modal without applying any changes
+     */
     close() {
         console.log('Closing filter wizard');
         this.isOpen = false;
         document.getElementById('filterWizardModal').style.display = 'none';
     }
 
+    /**
+     * Advances to the next step in the wizard
+     * Updates the display and triggers summary update on final step
+     */
     nextStep() {
         console.log('Moving to next step from:', this.currentStep);
         if (this.currentStep < this.totalSteps) {
@@ -225,6 +227,10 @@ class FilterWizard {
         }
     }
 
+    /**
+     * Goes back to the previous step in the wizard
+     * Only works if not on the first step
+     */
     previousStep() {
         console.log('Moving to previous step from:', this.currentStep);
         if (this.currentStep > 1) {
@@ -233,10 +239,14 @@ class FilterWizard {
         }
     }
 
+    /**
+     * Updates the visual display of the current step
+     * Handles step visibility, progress bar, step counter, and button states
+     */
     updateStepDisplay() {
         console.log('Updating step display to:', this.currentStep);
         
-        // Hide all steps
+        // Hide all steps first
         for (let i = 1; i <= this.totalSteps; i++) {
             const step = document.getElementById(`step${i}`);
             if (step) {
@@ -250,28 +260,30 @@ class FilterWizard {
             currentStepElement.style.display = 'block';
         }
 
-        // Update progress bar
+        // Update progress bar (shows percentage completion)
         const progress = (this.currentStep / this.totalSteps) * 100;
         const progressBar = document.getElementById('wizardProgress');
         if (progressBar) {
             progressBar.style.width = progress + '%';
         }
 
-        // Update step number
+        // Update step number display
         const stepNum = document.getElementById('currentStepNum');
         if (stepNum) {
             stepNum.textContent = this.currentStep;
         }
 
-        // Update button visibility
+        // Update button visibility based on current step
         const prevBtn = document.getElementById('wizardPrevious');
         const nextBtn = document.getElementById('wizardNext');
         const applyBtn = document.getElementById('wizardApply');
 
+        // Show Previous button only if not on first step
         if (prevBtn) {
             prevBtn.style.display = this.currentStep > 1 ? 'inline-block' : 'none';
         }
 
+        // On final step, show Apply button instead of Next
         if (this.currentStep === this.totalSteps) {
             if (nextBtn) nextBtn.style.display = 'none';
             if (applyBtn) applyBtn.style.display = 'inline-block';
@@ -281,17 +293,21 @@ class FilterWizard {
         }
     }
 
+    /**
+     * Updates the summary display on the final step
+     * Reads current form selections and shows human-readable labels
+     */
     updateSummary() {
         console.log('Updating summary');
         
-        // Get selected values
+        // Get currently selected values from radio buttons
         const authorType = document.querySelector('input[name="author_type"]:checked')?.value || 'all';
         const presentationType = document.querySelector('input[name="presentation_type"]:checked')?.value || 'all';
         const hasPresentation = document.querySelector('input[name="has_presentation"]:checked')?.value || 'all';
 
         console.log('Selected filters:', { authorType, presentationType, hasPresentation });
 
-        // Update summary display
+        // Map form values to human-readable labels
         const summaryMap = {
             author_type: {
                 'all': 'All Authors',
@@ -311,6 +327,7 @@ class FilterWizard {
             }
         };
 
+        // Update the summary display elements
         const summaryAuthorType = document.getElementById('summaryAuthorType');
         const summaryPresentationType = document.getElementById('summaryPresentationType');
         const summaryUploadStatus = document.getElementById('summaryUploadStatus');
@@ -320,10 +337,14 @@ class FilterWizard {
         if (summaryUploadStatus) summaryUploadStatus.textContent = summaryMap.has_presentation[hasPresentation];
     }
 
+    /**
+     * Collects all filter selections and applies them
+     * This is called when user clicks "Apply Filters" on the final step
+     */
     applyFilters() {
         console.log('Applying filters');
         
-        // Collect all filter values
+        // Collect all selected filter values from the form
         this.filters = {
             author_type: document.querySelector('input[name="author_type"]:checked')?.value || 'all',
             presentation_type: document.querySelector('input[name="presentation_type"]:checked')?.value || 'all',
@@ -332,32 +353,36 @@ class FilterWizard {
 
         console.log('Filter values collected:', this.filters);
 
-        // Close wizard
+        // Close the wizard modal
         this.close();
 
-        // Apply filters to the author list
+        // Execute the actual filtering
         this.executeFilters();
     }
 
+    /**
+     * Executes the actual filtering by making an AJAX request to the server
+     * This sends the filter criteria to the backend and updates the author list
+     */
     executeFilters() {
         console.log('Executing filters:', this.filters);
 
-        // Show loading indicator if showNotification is available
+        // Show loading notification if available
         if (typeof showNotification === 'function') {
             showNotification('info', 'Applying Filters', 'Please wait...');
         }
 
-        // Make AJAX request to reload authors with filters
+        // Prepare AJAX request parameters
         const xhr = new XMLHttpRequest();
         const params = new URLSearchParams();
         
-        // Add current session if available
+        // Include current session if available (for session-specific filtering)
         const sessionParam = new URLSearchParams(window.location.search).get('session');
         if (sessionParam) {
             params.append('session', sessionParam);
         }
         
-        // Add filter parameters
+        // Add filter parameters to the request
         params.append('action', 'filter_authors');
         params.append('author_type', this.filters.author_type);
         params.append('presentation_type', this.filters.presentation_type);
@@ -365,6 +390,7 @@ class FilterWizard {
 
         xhr.open('GET', `?${params.toString()}`, true);
         
+        // Handle successful response
         xhr.onload = function() {
             console.log('Filter response received:', {
                 status: xhr.status,
@@ -374,10 +400,10 @@ class FilterWizard {
             
             if (xhr.status === 200) {
                 try {
-                    // Clean response text to remove any potential BOM or whitespace
+                    // Clean up the response to handle any server output issues
                     let cleanResponse = xhr.responseText.trim();
                     
-                    // Check if response starts with HTML error (common PHP error)
+                    // Check if server returned HTML error instead of JSON
                     if (cleanResponse.startsWith('<')) {
                         console.error('Server returned HTML instead of JSON:', cleanResponse.substring(0, 200));
                         throw new Error('Server returned HTML error instead of JSON');
@@ -393,11 +419,12 @@ class FilterWizard {
                     
                     console.log('Cleaned response:', cleanResponse.substring(0, 200));
                     
+                    // Parse the JSON response
                     const response = JSON.parse(cleanResponse);
                     console.log('Parsed response:', response);
                     
                     if (response.success) {
-                        // Update the author cards container
+                        // Update the author cards with filtered results
                         const authorCards = document.querySelector('.author-cards');
                         if (authorCards && response.html) {
                             authorCards.innerHTML = response.html;
@@ -409,7 +436,7 @@ class FilterWizard {
                         // Update the active filters display
                         updateActiveFiltersDisplay(filterWizard.filters);
                         
-                        // Update filtered IDs
+                        // Update filtered author IDs for bulk operations
                         if (typeof updateFilteredAuthorIds === 'function') {
                             updateFilteredAuthorIds();
                         }
@@ -443,6 +470,7 @@ class FilterWizard {
             }
         };
         
+        // Handle network errors
         xhr.onerror = function() {
             console.error('Filter request error');
             if (typeof showNotification === 'function') {
@@ -451,6 +479,7 @@ class FilterWizard {
             }
         };
         
+        // Handle timeouts
         xhr.ontimeout = function() {
             console.error('Filter request timeout');
             if (typeof showNotification === 'function') {
@@ -459,13 +488,17 @@ class FilterWizard {
             }
         };
         
-        // Set timeout to 30 seconds
+        // Set 30 second timeout for the request
         xhr.timeout = 30000;
         
+        // Send the request
         xhr.send();
     }
 
-    // FIXED: Reset method that properly updates the UI
+    /**
+     * Resets the wizard to initial state
+     * Used internally when filters need to be reset
+     */
     reset() {
         console.log('Resetting filter wizard');
         this.currentStep = 1;
@@ -475,7 +508,7 @@ class FilterWizard {
             has_presentation: 'all'
         };
         
-        // Reset form selections
+        // Reset all radio button selections to "all"
         const authorTypeRadios = document.querySelectorAll('input[name="author_type"]');
         const presentationTypeRadios = document.querySelectorAll('input[name="presentation_type"]');
         const uploadStatusRadios = document.querySelectorAll('input[name="has_presentation"]');
@@ -486,24 +519,8 @@ class FilterWizard {
         
         this.updateStepDisplay();
         
-        // FIXED: Update the active filters display after reset
+        // Update the active filters display
         updateActiveFiltersDisplay(this.filters);
-    }
-
-    // NEW: Method to handle clearing all filters via the clear button
-    clearAllFilters() {
-        console.log('Clearing all filters via clear button');
-        
-        // Reset the wizard state
-        this.reset();
-        
-        // Execute the filters to reload the page with no filters
-        this.executeFilters();
-        
-        // Show success notification
-        if (typeof showNotification === 'function') {
-            showNotification('success', 'Filters Cleared', 'All filters have been removed');
-        }
     }
 }
 
@@ -515,16 +532,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
- * FIXED: Update the active filters display to target correct elements
+ * Updates the active filters display on the main page
+ * Shows filter badges and count indicator on the "Set Filters" button
+ * 
+ * @param {Object} filters - The current filter state
  */
 function updateActiveFiltersDisplay(filters) {
     console.log('Updating active filters display:', filters);
     
-    // Look for the correct filter indicator on the "Set Filters" button
+    // Find the filter indicator on the "Set Filters" button
     const filterButton = document.querySelector('.set-filters-btn');
     const filterIndicator = filterButton ? filterButton.querySelector('.filter-indicator') : null;
     
-    // Also look for the active filters container
+    // Find the active filters container and list
     const container = document.getElementById('activeFiltersContainer');
     const list = document.getElementById('activeFiltersList');
     
@@ -533,10 +553,10 @@ function updateActiveFiltersDisplay(filters) {
         return;
     }
     
-    // Clear existing tags
+    // Clear existing filter tags
     list.innerHTML = '';
     
-    // Count active filters
+    // Count active filters and create labels
     let activeCount = 0;
     const filterLabels = {
         author_type: {
@@ -554,7 +574,7 @@ function updateActiveFiltersDisplay(filters) {
         }
     };
     
-    // Add filter tags
+    // Create filter tag elements for active filters
     Object.keys(filters).forEach(key => {
         const value = filters[key];
         if (value && value !== 'all') {
@@ -570,19 +590,18 @@ function updateActiveFiltersDisplay(filters) {
         }
     });
     
-    // FIXED: Update the filter indicator on the "Set Filters" button
+    // Update the filter count indicator on the button
     if (filterIndicator) {
         if (activeCount > 0) {
             filterIndicator.textContent = activeCount;
             filterIndicator.style.display = 'inline-block';
         } else {
-            // FIXED: Properly hide the indicator when no filters are active
             filterIndicator.style.display = 'none';
             filterIndicator.textContent = '0';
         }
     }
     
-    // Show/hide active filters container
+    // Show/hide the active filters container
     if (activeCount > 0) {
         container.style.display = 'block';
     } else {
@@ -590,17 +609,7 @@ function updateActiveFiltersDisplay(filters) {
     }
 }
 
-/**
- * FIXED: Global function to clear all filters - properly resets the count
- */
-function clearAllFilters() {
-    console.log('Global clearAllFilters called');
-    if (typeof filterWizard !== 'undefined' && filterWizard) {
-        filterWizard.clearAllFilters();
-    }
-}
-
 // Export for use in other modules
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { FilterWizard, updateActiveFiltersDisplay, clearAllFilters };
+    module.exports = { FilterWizard, updateActiveFiltersDisplay };
 }
