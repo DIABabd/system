@@ -5,7 +5,7 @@
  * This handles creating separate conversation histories for each unique filter combination
  */
 
-class EnhancedGroupMailHandler
+class GroupMailHandler
 {
     /**
      * Send group email with filter criteria tracking

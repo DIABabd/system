@@ -5,7 +5,7 @@
  * Handles AJAX requests for filter-based email conversations
  */
 
-class EnhancedAjaxHandler
+class AjaxHandler
 {
     public function processRequest()
     {
@@ -54,8 +54,8 @@ class EnhancedAjaxHandler
     {
         $userId = getUserID();
 
-        require_once __DIR__ . "/EnhancedGroupMailHandler.php";
-        $handler = new EnhancedGroupMailHandler();
+        require_once __DIR__ . "/GroupMailHandler.php";
+        $handler = new GroupMailHandler();
 
         $conversations = $handler->getFilteredConversations($userId);
 
@@ -78,8 +78,8 @@ class EnhancedAjaxHandler
             return;
         }
 
-        require_once __DIR__ . "/EnhancedGroupMailHandler.php";
-        $handler = new EnhancedGroupMailHandler();
+        require_once __DIR__ . "/GroupMailHandler.php";
+        $handler = new GroupMailHandler();
 
         $emails = $handler->getFilteredEmailHistory($userId, $filterSignature);
 
@@ -145,8 +145,8 @@ class EnhancedAjaxHandler
         }
 
         // Send the email
-        require_once __DIR__ . "/EnhancedGroupMailHandler.php";
-        $handler = new EnhancedGroupMailHandler();
+        require_once __DIR__ . "/GroupMailHandler.php";
+        $handler = new GroupMailHandler();
 
         $result = $handler->sendGroupEmailWithFilters(
             $userId,
