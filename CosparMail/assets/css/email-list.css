@@ -1,0 +1,296 @@
+/* 
+ * Email list and items styles
+ * Contains styles for email history, list items, and message previews
+ */
+
+/* Email history section */
+.email-history {
+    margin-top: 20px;
+}
+
+/* Email list container */
+.email-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Base email item styling */
+.email-item {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    margin-bottom: 15px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+    width: 85%;
+}
+
+.email-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Outbound emails (sent by MSO/DO) - left aligned */
+.email-item.outbound {
+    margin-right: auto;
+    margin-left: 0;
+    border-left: 4px solid #4a74e8; /* Blue left border */
+}
+
+/* Email header section */
+.email-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.email-direction {
+    margin-right: 10px;
+    width: 20px;
+}
+
+.email-subject {
+    font-weight: 600;
+    color: #333;
+    flex-grow: 1;
+}
+
+.email-time {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Email preview text */
+.email-preview {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+/* Email participants info */
+.email-participants {
+    display: flex;
+    flex-direction: column;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.email-participants span {
+    margin-bottom: 2px;
+}
+
+/* CC and BCC info */
+.email-cc, .email-bcc {
+    font-size: 12px;
+    color: #777;
+    margin-top: 2px;
+}
+
+/* Email footer with button */
+.email-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+
+/* Button colors for outbound emails */
+.email-item.outbound .view-details-btn {
+    background-color: #f0f4ff;
+    color: #4a74e8;
+    border: 1px solid #e0e8ff;
+}
+
+.email-item.outbound .view-details-btn:hover {
+    background-color: #e0e8ff;
+}
+
+/* No emails message */
+.no-emails-message {
+    text-align: center;
+    padding: 30px 0;
+    color: #777;
+}
+
+.no-emails-message i {
+    font-size: 48px;
+    margin-bottom: 15px;
+    color: #ccc;
+}
+
+/* Bulk email notice */
+.bulk-email-notice {
+    background-color: #f5f7fa;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bulk-email-notice i {
+    font-size: 32px;
+    color: #4a74e8;
+    margin-bottom: 10px;
+}
+
+.author-count {
+    background-color: #f0f4ff;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.author-count strong {
+    color: #4a74e8;
+    font-size: 18px;
+}
+
+/*  
+ * Email List Attachment Indicators and Mini Previews
+ */
+
+/* Attachment indicator in subject line */
+.attachment-indicator {
+    margin-left: 8px;
+    color: #666;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.email-item:hover .attachment-indicator {
+    color: #4a74e8;
+    opacity: 1;
+}
+
+/* Email attachments preview section */
+.email-attachments-preview {
+    margin: 8px 0;
+    padding: 8px 0;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Mini attachments list */
+.attachments-mini-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+}
+
+/* Individual mini attachment items */
+.attachment-mini-item {
+    display: flex;
+    align-items: center;
+    padding: 4px 8px;
+    background: rgba(74, 116, 232, 0.08);
+    border: 1px solid rgba(74, 116, 232, 0.2);
+    border-radius: 12px;
+    font-size: 11px;
+    color: #4a74e8;
+    transition: all 0.2s ease;
+    max-width: 120px;
+}
+
+.attachment-mini-item:hover {
+    background: rgba(74, 116, 232, 0.15);
+    border-color: rgba(74, 116, 232, 0.3);
+    transform: translateY(-1px);
+}
+
+.attachment-mini-item i {
+    margin-right: 4px;
+    font-size: 10px;
+}
+
+.attachment-mini-item span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+}
+
+/* "More attachments" indicator */
+.attachment-mini-item.more-attachments {
+    background: rgba(108, 117, 125, 0.1);
+    border-color: rgba(108, 117, 125, 0.2);
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.attachment-mini-item.more-attachments:hover {
+    background: rgba(108, 117, 125, 0.2);
+    border-color: rgba(108, 117, 125, 0.3);
+}
+
+/* Different file type colors for mini items */
+.attachment-mini-item .fa-file-pdf {
+    color: #dc3545;
+}
+
+.attachment-mini-item .fa-file-word {
+    color: #2b579a;
+}
+
+.attachment-mini-item .fa-file-excel {
+    color: #107c41;
+}
+
+.attachment-mini-item .fa-file-powerpoint {
+    color: #d24726;
+}
+
+.attachment-mini-item .fa-file-image {
+    color: #6f42c1;
+}
+
+.attachment-mini-item .fa-file-alt {
+    color: #6c757d;
+}
+
+.attachment-mini-item .fa-file {
+    color: #495057;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .attachments-mini-list {
+        gap: 4px;
+    }
+    
+    .attachment-mini-item {
+        padding: 3px 6px;
+        font-size: 10px;
+        max-width: 100px;
+    }
+    
+    .attachment-mini-item i {
+        font-size: 9px;
+        margin-right: 3px;
+    }
+    
+    .attachment-indicator {
+        font-size: 12px;
+        margin-left: 6px;
+    }
+}
+
+/* Animation for attachment preview on hover */
+.email-item:hover .email-attachments-preview {
+    background: rgba(74, 116, 232, 0.02);
+    border-radius: 4px;
+    padding: 8px;
+    margin: 8px -4px;
+}
+
+/* Ensure email footer has proper spacing when attachments are present */
+.email-item .email-attachments-preview + .email-footer {
+    margin-top: 8px;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 8px;
+}

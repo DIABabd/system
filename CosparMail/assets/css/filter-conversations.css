@@ -1,0 +1,226 @@
+/* Filter Conversation Switcher Styles */
+
+.conversation-switcher {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.switcher-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.switcher-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.conversation-select {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background: white;
+    font-size: 14px;
+    color: #333;
+    transition: border-color 0.2s ease;
+    min-width: 0; /* Allow shrinking */
+}
+
+.conversation-select:focus {
+    outline: none;
+    border-color: #4a74e8;
+    box-shadow: 0 0 0 3px rgba(74, 116, 232, 0.15);
+}
+
+.conversation-select option {
+    padding: 8px;
+}
+
+.current-filters {
+    margin-top: 12px;
+    padding: 8px 12px;
+    background: #e3f2fd;
+    border-radius: 4px;
+    border-left: 4px solid #2196f3;
+}
+
+.current-filters small {
+    color: #666;
+    font-weight: 500;
+}
+
+.current-filters span {
+    color: #1976d2;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* Email item enhancements for filter info */
+.email-filter-info {
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #f1f3f4;
+    border-radius: 4px;
+    border-left: 3px solid #4285f4;
+}
+
+.email-filter-info small {
+    color: #5f6368;
+    font-size: 12px;
+}
+
+.email-filter-info strong {
+    color: #202124;
+}
+
+/* No emails message for filter groups */
+.no-emails-message {
+    text-align: center;
+    padding: 40px 20px;
+    color: #666;
+}
+
+.no-emails-message i {
+    font-size: 48px;
+    color: #ddd;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.no-emails-message p {
+    margin: 8px 0;
+    font-size: 14px;
+}
+
+.no-emails-message p:first-of-type {
+    font-weight: 600;
+    color: #333;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+    .switcher-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .switcher-header h3 {
+        text-align: center;
+    }
+    
+    .conversation-select {
+        width: 100%;
+    }
+}
+
+/* Enhanced email item styling */
+.email-item.outbound {
+    border-left: 4px solid #4285f4;
+}
+
+.email-item .email-participants {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #666;
+}
+
+.email-item .email-participants span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.email-item .email-participants strong {
+    color: #333;
+}
+
+/* Loading state for conversation switcher */
+.conversation-switcher.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.conversation-switcher.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 2px solid #4285f4;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Filter badge styles for better visual hierarchy */
+.filter-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background: #e8f4f8;
+    color: #1976d2;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-left: 4px;
+}
+
+.filter-badge.author-type {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.filter-badge.presentation-type {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.filter-badge.upload-status {
+    background: #e8f5e8;
+    color: #388e3c;
+}
+
+/* Improved select dropdown styling */
+.conversation-select {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+    appearance: none;
+}
+
+/* Hover effects */
+.conversation-select:hover {
+    border-color: #bbb;
+}
+
+.email-item:hover .email-filter-info {
+    background: #e8f4f8;
+    border-left-color: #2196f3;
+}
+
+/* Focus indicators for accessibility */
+.conversation-switcher:focus-within {
+    box-shadow: 0 0 0 2px rgba(74, 116, 232, 0.2);
+}

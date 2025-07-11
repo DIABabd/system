@@ -1,0 +1,171 @@
+/* 
+ * COSPAR Mail System - Header Styles - FIXED BACK BUTTON POSITIONING
+ * Contains styles for the main application header
+ */
+
+header {
+    background: #2b2b74;
+    padding: 20px 20px;
+    height: 70px; /* Fixed height */
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Deeper shadow for emphasis */
+    position: relative; /* For proper child positioning */
+    overflow: visible; /* Make sure elements don't get cut off */
+    width: 100%; /* Ensure full width */
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out the three sections */
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 70px; /* Match header height */
+    padding: 0 20px;
+    position: relative;
+}
+
+.header-left {
+    /* Back button takes up left space */
+    flex: 0 0 auto; /* Don't grow or shrink */
+    display: flex;
+    align-items: center;
+    min-width: 120px; /* Reserve space for back button */
+}
+
+.header-right {
+    /* Right section for future elements */
+    flex: 0 0 auto; /* Don't grow or shrink */
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 120px; /* Reserve space to balance layout */
+}
+
+.header-center {
+    /* Center content takes remaining space and centers itself */
+    flex: 1; /* Take remaining space */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.brand-link {
+    font-size: 38px; /* Even bigger font size */
+    font-weight: 700;
+    color: white !important;
+    text-decoration: none !important;
+    letter-spacing: 3px; /* More letter spacing */
+    transition: all 0.3s ease;
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-transform: uppercase; /* Make it all uppercase for more impact */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Stronger text shadow for more depth */
+    transform: scale(1); /* For hover effect */
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.brand-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.03) translateY(-1px);
+}
+
+.back-button {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    transform: translateX(-10px);
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Remove any positioning that could cause overlap */
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateX(0) translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button.ready {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.back-button i {
+    font-size: 14px; /* Slightly larger icon */
+}
+
+/* Page transition effects */
+body {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Responsive styles for the header */
+@media (max-width: 768px) {
+    .header-container {
+        padding: 0 15px; /* Less padding on small screens */
+    }
+    
+    .header-left {
+        left: 15px; /* Closer to edge on mobile */
+    }
+    
+    .header-right {
+        right: 15px; /* Closer to edge on mobile */
+    }
+    
+    .brand-link {
+        font-size: 28px; /* Smaller font on mobile */
+        letter-spacing: 2px;
+    }
+    
+    .back-button {
+        padding: 8px 12px; /* Smaller padding */
+        font-size: 12px; /* Smaller font */
+    }
+    
+    .back-button i {
+        font-size: 12px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 0 10px;
+    }
+    
+    .header-left {
+        left: 10px;
+    }
+    
+    .header-right {
+        right: 10px;
+    }
+    
+    .brand-link {
+        font-size: 24px; /* Even smaller font on very small screens */
+        letter-spacing: 1px;
+    }
+    
+    .back-button {
+        padding: 6px 10px;
+        font-size: 11px;
+    }
+}

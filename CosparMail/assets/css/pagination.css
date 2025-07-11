@@ -1,0 +1,32 @@
+/* 
+ * Pagination styles
+ * Contains styles for pagination controls
+ */
+
+/* Pagination styling */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination button {
+    margin: 0 3px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background-color: #f0f4ff;
+    border-color: #4a74e8;
+}
+
+.pagination button:disabled {
+    background-color: #4a74e8;
+    color: white;
+    border-color: #4a74e8;
+}

@@ -1,0 +1,51 @@
+/* 
+ * Layout styles
+ * Contains main content layout, sections, and separators
+ */
+
+/* Main content layout */
+main {
+    display: grid;
+    grid-template-columns: 1fr 1px 2.7fr;
+    min-height: calc(100vh - 150px); /* Subtract header and footer */
+}
+
+/* Left navigation section */
+nav {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    margin: 8px 25px;
+    height: 100%;
+}
+
+/* Vertical separator line */
+.vertical-line {
+    width: 1px; /* Thickness of the line */
+    background-color: rgb(172, 172, 172); /* Color of the line */
+    margin-top: 32px;
+    height: 97%; /* Space around the line */
+}
+
+/* Right section styling */
+.rightSection {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    margin: 10px 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    min-height: 500px;
+}
+
+/* Author info section */
+#authorInfo {
+    margin-bottom: 20px;
+}
+
+#authorInfo h2 {
+    color: #333;
+    font-size: 20px;
+    margin-top: 0;
+}

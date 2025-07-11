@@ -1,0 +1,473 @@
+/* 
+ * Compose form styles - Improved Layout and Spacing with Better File Attachments
+ * Contains styles for email composition form
+ */
+
+/* Form layout */
+#mailForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-content label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* Fix for all inputs to take full width */
+.popup-content input, 
+.popup-content textarea {
+    width: 100%;
+    box-sizing: border-box;
+    resize: none;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.popup-content input:focus,
+.popup-content textarea:focus {
+    border-color: #4a74e8;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 116, 232, 0.15);
+}
+
+.popup-content textarea {
+    min-height: 250px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Recipient row layout - Fixed to use full width */
+.recipient-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+/* Label column */
+.recipient-label {
+    width: 50px;
+    flex-shrink: 0;
+}
+
+.recipient-label label {
+    margin-bottom: 0;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Input field column - Fixed to take available space */
+.recipient-input {
+    flex: 1;
+    width: 100%;
+}
+
+.recipient-input input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: border 0.2s;
+    margin-bottom: 0;
+}
+
+.recipient-input input:focus {
+    border-color: #4a74e8;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 116, 232, 0.15);
+}
+
+/* Toggle buttons column */
+.recipient-toggles {
+    display: flex;
+    margin-left: 10px;
+    flex-shrink: 0;
+}
+
+/* Add spacing after the recipient fields */
+#bccField {
+    margin-bottom: 15px;
+}
+
+/* Send and Cancel buttons container */
+#mailForm > div:last-child {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .recipient-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .recipient-label {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    .recipient-toggles {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    #mailForm > div:last-child {
+        flex-direction: column;
+    }
+    
+    .send-mail-btn, .cancel-mail-btn {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+}
+
+/* 
+ * IMPROVED Professional File Attachment Styles
+ */
+
+/* Attachments section styling */
+.attachments-section {
+    margin-bottom: 20px;
+}
+
+.attachments-section label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/* File upload container */
+.file-upload-container {
+    width: 100%;
+}
+
+/* Simplified drag & drop area */
+.file-upload-area {
+    position: relative;
+    border: 2px dashed rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-upload-area:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.file-upload-area.dragover {
+    border-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* File upload content */
+.file-upload-content {
+    color: #666;
+}
+
+.file-upload-content i {
+    font-size: 24px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.file-upload-content p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.file-upload-link {
+    color: #333;
+    font-weight: 500;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.file-upload-link:hover {
+    color: #000;
+}
+
+.file-upload-hint {
+    font-size: 12px !important;
+    color: #999 !important;
+    margin-top: 4px !important;
+}
+
+/* Hidden file input */
+.file-upload-area input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Selected files section - IMPROVED DESIGN */
+.selected-files {
+    margin-top: 16px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+.selected-files h4 {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.files-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Individual file item - MUCH CLEANER DESIGN */
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #ffffff;
+    border: 2px solid #e8ecf0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.file-item:hover {
+    border-color: #4a74e8;
+    box-shadow: 0 2px 8px rgba(74, 116, 232, 0.15);
+    transform: translateY(-1px);
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+/* File icon - cleaner and more prominent */
+.file-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Different colors for different file types */
+.file-icon[data-type="pdf"] {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+}
+
+.file-icon[data-type="doc"],
+.file-icon[data-type="docx"] {
+    background: linear-gradient(135deg, #2b579a 0%, #1e3d72 100%);
+}
+
+.file-icon[data-type="xls"],
+.file-icon[data-type="xlsx"] {
+    background: linear-gradient(135deg, #107c41 0%, #0d5d31 100%);
+}
+
+.file-icon[data-type="ppt"],
+.file-icon[data-type="pptx"] {
+    background: linear-gradient(135deg, #d24726 0%, #b8391a 100%);
+}
+
+.file-icon[data-type="jpg"],
+.file-icon[data-type="jpeg"],
+.file-icon[data-type="png"],
+.file-icon[data-type="gif"] {
+    background: linear-gradient(135deg, #6f42c1 0%, #5a32a3 100%);
+}
+
+.file-icon[data-type="txt"] {
+    background: linear-gradient(135deg, #6c757d 0%, #545b62 100%);
+}
+
+.file-details {
+    flex: 1;
+    min-width: 0;
+}
+
+.file-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.file-size {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Remove button - cleaner design */
+.file-remove {
+    background: #ffffff;
+    border: 2px solid #e74c3c;
+    color: #e74c3c;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    margin-left: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-remove:hover {
+    background-color: #e74c3c;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.file-remove:active {
+    transform: scale(0.95);
+}
+
+/* Form actions styling */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* Email details attachment display */
+.email-attachments {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
+}
+
+.email-attachments h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+}
+
+.attachment-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.attachment-item {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    font-size: 12px;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.attachment-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: #333;
+}
+
+.attachment-item i {
+    margin-right: 6px;
+    font-size: 12px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .file-upload-area {
+        padding: 16px 12px;
+        min-height: 70px;
+    }
+    
+    .file-upload-content i {
+        font-size: 20px;
+    }
+    
+    .file-item {
+        padding: 6px 10px;
+    }
+    
+    .file-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 9px;
+        margin-right: 8px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .send-mail-btn, .cancel-mail-btn {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .attachment-list {
+        flex-direction: column;
+    }
+}

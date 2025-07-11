@@ -1,0 +1,381 @@
+/* 
+ * Button styles - Consolidated
+ * Contains styles for all buttons in the system
+ */
+
+/* Common Button Base Styles */
+.btn {
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn i {
+    margin-right: 8px;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Primary button style (blue) */
+.btn-primary {
+    background-color: #4a74e8;
+    color: white;
+    border: none;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(74, 116, 232, 0.25);
+}
+
+.btn-primary:hover {
+    background-color: #3a64d8;
+    box-shadow: 0 4px 8px rgba(74, 116, 232, 0.3);
+}
+
+.btn-primary:active {
+    background-color: #2a54c8;
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 2px 5px rgba(74, 116, 232, 0.3);
+}
+
+/* Secondary button style (light gray) */
+.btn-secondary {
+    background-color: #f5f5f5;
+    color: #555;
+    border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+    background-color: #e8e8e8;
+}
+
+/* Button sizes */
+.btn-sm {
+    padding: 6px 12px;
+    font-size: 13px;
+}
+
+.btn-md {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.btn-lg {
+    padding: 12px 24px;
+    font-size: 15px;
+}
+
+/* Expand button styling */
+.expand-button {
+    border: 1px solid #e6e9ef;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f4ff;
+    color: #4a74e8;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.expand-button:hover {
+    background-color: #e0e8ff;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(74, 116, 232, 0.2);
+}
+
+.expand-button:active {
+    background-color: #d0dcff;
+    transform: scale(0.95);
+}
+
+/* Email Action Buttons Container */
+.email-actions {
+    display: flex;
+    gap: 12px;
+    margin: 20px 0;
+    padding: 0;
+}
+
+/* New mail button styling - Modern primary button */
+.new-mail {
+    background: linear-gradient(135deg, #4a74e8 0%, #3a64d8 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(74, 116, 232, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.new-mail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.new-mail:hover::before {
+    left: 100%;
+}
+
+.new-mail i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.new-mail:hover {
+    background: linear-gradient(135deg, #3a64d8 0%, #2a54c8 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 116, 232, 0.4);
+}
+
+.new-mail:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(74, 116, 232, 0.3);
+}
+
+/* External mail button styling - Modern secondary button */
+.external-mail {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    color: #495057;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+.external-mail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(73, 80, 87, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.external-mail:hover::before {
+    left: 100%;
+}
+
+.external-mail i {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.external-mail:hover {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-color: #dee2e6;
+    color: #343a40;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.external-mail:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive design for smaller screens */
+@media screen and (max-width: 768px) {
+    .email-actions {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .new-mail,
+    .external-mail {
+        width: 100%;
+        min-width: unset;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Close button styling */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-button:hover {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* View details button base style */
+.view-details-btn {
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    border: 1px solid transparent;
+    display: flex;
+    align-items: center;
+}
+
+.view-details-btn i {
+    margin-right: 6px;
+}
+
+.view-details-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Button colors for outbound emails only */
+.email-item.outbound .view-details-btn {
+    background-color: #f0f4ff;
+    color: #4a74e8;
+    border: 1px solid #e0e8ff;
+}
+
+.email-item.outbound .view-details-btn:hover {
+    background-color: #e0e8ff;
+}
+
+/* Close button for popups */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 25px;
+    font-size: 22px;
+    color: #888;
+    cursor: pointer;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.close-btn:hover {
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+/* Toggle buttons for CC/BCC */
+.toggle-btn {
+    background-color: #f0f2f5;
+    color: #555;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-left: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.toggle-btn:hover {
+    background-color: #e4e6e9;
+}
+
+.toggle-btn.active {
+    background-color: #e0e8ff;
+    color: #4a74e8;
+    border-color: #c5d3ff;
+}
+
+/* Send button styling */
+.send-mail-btn {
+    background-color: #4a74e8;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(74, 116, 232, 0.3);
+    margin-right: 12px;
+}
+
+.send-mail-btn:hover {
+    background-color: #3a64d8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(74, 116, 232, 0.4);
+}
+
+.send-mail-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(74, 116, 232, 0.3);
+}
+
+.send-mail-btn i {
+    margin-right: 8px;
+}
+
+/* Cancel button styling */
+.cancel-mail-btn {
+    background-color: #f5f5f5;
+    color: #555;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-mail-btn:hover {
+    background-color: #e8e8e8;
+}

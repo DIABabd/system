@@ -1,0 +1,480 @@
+/* Filter Wizard Modal Styles */
+.filter-wizard-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.filter-wizard-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+    margin: auto;
+    position: relative;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-wizard-header {
+    background: #2b2b74;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-wizard-header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.close-wizard {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.close-wizard:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.filter-wizard-progress {
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3c78d8, #4CAF50);
+    width: 25%;
+    transition: width 0.3s ease;
+}
+
+.step-indicator {
+    text-align: center;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.filter-wizard-body {
+    padding: 30px;
+    min-height: 300px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.wizard-step {
+    animation: stepFadeIn 0.3s ease-in-out;
+}
+
+@keyframes stepFadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.wizard-step h3 {
+    margin: 0 0 10px 0;
+    color: #333;
+    font-size: 1.3em;
+}
+
+.wizard-step p {
+    margin: 0 0 25px 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.filter-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.filter-option:hover {
+    border-color: #3c78d8;
+    background-color: #f8f9ff;
+}
+
+.filter-option input[type="radio"] {
+    display: none;
+}
+
+.filter-option input[type="radio"]:checked + .checkmark {
+    background-color: #3c78d8;
+    border-color: #3c78d8;
+}
+
+.filter-option input[type="radio"]:checked + .checkmark::after {
+    display: block;
+}
+
+.filter-option input[type="radio"]:checked ~ .option-content {
+    color: #3c78d8;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    margin-right: 15px;
+    position: relative;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 50%;
+    top: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    transform: translate(-50%, -50%);
+}
+
+.option-content {
+    flex: 1;
+}
+
+.option-content strong {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+}
+
+.option-content small {
+    color: #888;
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+
+.filter-controls {
+    margin-bottom: 20px;
+}
+
+.filter-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.filter-label {
+    display: inline-block;
+    font-weight: 600;
+    color: #333;
+    font-size: 1em;
+}
+
+.set-filters-btn {
+    background: #2b2b74;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.set-filters-btn:hover {
+    background: #063072;
+    transform: translateY(-1px);
+}
+
+.set-filters-btn i {
+    font-size: 1.1em;
+}
+
+.filter-indicator {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #dc3545;
+    color: #fff;
+    font-size: 0.7em;
+    border-radius: 50%;
+    padding: 2px 6px;
+    display: none;
+    line-height: 1;
+    z-index: 10;
+}
+
+.set-filters-btn .filter-indicator[style] {
+    display: inline-block !important;
+}
+
+.active-filters-container {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 10px 15px;
+    display: none;
+}
+
+.active-filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.active-filters-title {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.9em;
+}
+
+.clear-filters-btn {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clear-filters-btn:hover {
+    background: #d32f2f;
+}
+
+.active-filters-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter-tag {
+    background: #4CAF50;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.search-section {
+    display: none;
+}
+
+.filter-summary {
+    background: #f8f9ff;
+    border: 1px solid #e0e8ff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 0;
+}
+
+.filter-summary h4 {
+    margin: 0 0 15px 0;
+    color: #3c78d8;
+    font-size: 1.1em;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #e0e8ff;
+}
+
+.summary-item:last-child {
+    border-bottom: none;
+}
+
+.summary-item strong {
+    color: #333;
+    font-weight: 600;
+}
+
+.summary-item span {
+    color: #666;
+    font-weight: normal;
+}
+
+.filter-wizard-footer {
+    background: #f5f5f5;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #eee;
+}
+
+.filter-wizard-footer button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#wizardPrevBtn {
+    background: #f0f0f0;
+    color: #666;
+}
+
+#wizardPrevBtn:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+#wizardNextBtn {
+    background: #3c78d8;
+    color: white;
+    margin-left: auto;
+}
+
+#wizardNextBtn:hover {
+    background: #2c68c8;
+}
+
+#wizardApplyBtn {
+    background: #4CAF50;
+    color: white;
+    margin-left: auto;
+}
+
+#wizardApplyBtn:hover {
+    background: #45a049;
+}
+
+.active-filters-indicator {
+    background: #4CAF50;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    margin-left: 8px;
+}
+
+@media (max-width: 768px) {
+    .filter-wizard-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+    
+    .filter-wizard-header {
+        padding: 15px;
+    }
+    
+    .filter-wizard-body {
+        padding: 20px;
+    }
+    
+    .filter-wizard-footer {
+        padding: 15px;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .filter-wizard-footer button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    #wizardNextBtn,
+    #wizardApplyBtn {
+        margin-left: 0;
+        order: 2;
+    }
+    
+    #wizardPrevBtn {
+        order: 1;
+    }
+    
+    .filter-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .active-filters-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .clear-filters-btn {
+        align-self: flex-end;
+    }
+}

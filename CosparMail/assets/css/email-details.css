@@ -1,0 +1,65 @@
+/* 
+ * Email details styles
+ * Contains styles for email details popup and content
+ */
+
+/* Email details popup styling */
+#emailDetailsModal {
+    /* Popup styling is in compose-form.css */
+}
+
+/* Email details content styling */
+.email-full-details {
+    padding: 15px;
+}
+
+.email-detail-header {
+    margin-bottom: 20px;
+}
+
+.email-detail-header h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #333;
+    padding-right: 30px;
+}
+
+.email-meta {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.email-detail-content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.email-detail-footer {
+    text-align: right;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+/* Status badges for emails */
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 12px;
+    border-radius: 12px;
+    font-weight: normal;
+    margin-left: 10px;
+}
+
+.badge.outbound {
+    background-color: #e0f7fa;
+    color: #0097a7;
+}
+
+.badge.inbound {
+    background-color: #e8f5e9;
+    color: #388e3c;
+}
