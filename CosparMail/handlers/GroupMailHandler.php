@@ -1,9 +1,14 @@
 <?php
 /**
  * Enhanced GroupMailHandler with Filter-Based Conversation Tracking
- * 
- * This handles creating separate conversation histories for each unique filter combination
+ * Compatible with existing EmailSender class
  */
+
+// Load PHPMailer classes
+require_once '/home/projects/phpMyIAC/htdocs/include/PHPmailer/vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class GroupMailHandler
 {
@@ -48,8 +53,18 @@ class GroupMailHandler
                 if ($result && mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_assoc($result);
                     if (!empty($row['mail'])) {
-                        $validRecipientIds[] = $row['id'];
-                        $recipientEmails[] = $row['mail'];
+                        // Fix email addresses that use (at) instead of @
+                        $cleanEmail = str_replace('(at)', '@', $row['mail']);
+                        $cleanEmail = trim($cleanEmail);
+
+                        // Validate the cleaned email
+                        if (filter_var($cleanEmail, FILTER_VALIDATE_EMAIL)) {
+                            $validRecipientIds[] = $row['id'];
+                            $recipientEmails[] = $cleanEmail;
+                            error_log("Added valid recipient: " . $cleanEmail);
+                        } else {
+                            error_log("Invalid email address skipped: " . $row['mail'] . " (cleaned: " . $cleanEmail . ")");
+                        }
                     }
                 }
             }
@@ -61,10 +76,22 @@ class GroupMailHandler
                 ];
             }
 
-            // Send email using PHPMailer
-            require_once "classes/EmailSender.php";
-            $emailSender = new EmailSender();
-            $mail = $emailSender->createMailer();
+            // Send email using PHPMailer directly (since EmailSender doesn't have createMailer)
+            $mail = new PHPMailer(true);
+
+            // Configure SMTP settings (same as your EmailSender)
+            $mail->isSMTP();
+            $mail->Host = '192.168.50.229';
+            $mail->Port = 1025;
+            $mail->SMTPAuth = false;
+            $mail->SMTPAutoTLS = false;
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
 
             // Set sender
             $senderQuery = "SELECT first, last, mail FROM user WHERE id = $senderId";
@@ -72,6 +99,9 @@ class GroupMailHandler
             $senderData = mysqli_fetch_assoc($senderResult);
 
             $mail->setFrom($senderData['mail'], $senderData['first'] . ' ' . $senderData['last']);
+
+            // Add sender as main recipient (so they get a copy)
+            $mail->addAddress($senderData['mail'], $senderData['first'] . ' ' . $senderData['last']);
 
             // Add all recipients as BCC to protect privacy
             foreach ($recipientEmails as $email) {
@@ -83,8 +113,13 @@ class GroupMailHandler
                 $ccEmails = explode(',', $ccAddresses);
                 foreach ($ccEmails as $ccEmail) {
                     $ccEmail = trim($ccEmail);
-                    if (!empty($ccEmail)) {
-                        $mail->addCC($ccEmail);
+                    // Fix (at) in CC addresses
+                    $cleanCcEmail = str_replace('(at)', '@', $ccEmail);
+                    if (!empty($cleanCcEmail) && filter_var($cleanCcEmail, FILTER_VALIDATE_EMAIL)) {
+                        $mail->addCC($cleanCcEmail);
+                        error_log("Added CC: " . $cleanCcEmail);
+                    } else {
+                        error_log("Invalid CC email skipped: " . $ccEmail);
                     }
                 }
             }
@@ -94,8 +129,13 @@ class GroupMailHandler
                 $bccEmails = explode(',', $bccAddresses);
                 foreach ($bccEmails as $bccEmail) {
                     $bccEmail = trim($bccEmail);
-                    if (!empty($bccEmail)) {
-                        $mail->addBCC($bccEmail);
+                    // Fix (at) in BCC addresses
+                    $cleanBccEmail = str_replace('(at)', '@', $bccEmail);
+                    if (!empty($cleanBccEmail) && filter_var($cleanBccEmail, FILTER_VALIDATE_EMAIL)) {
+                        $mail->addBCC($cleanBccEmail);
+                        error_log("Added BCC: " . $cleanBccEmail);
+                    } else {
+                        error_log("Invalid BCC email skipped: " . $bccEmail);
                     }
                 }
             }
@@ -103,7 +143,10 @@ class GroupMailHandler
             // Handle attachments
             if (!empty($attachments)) {
                 foreach ($attachments as $attachment) {
-                    $mail->addAttachment($attachment['tmp_name'], $attachment['original_name']);
+                    if (file_exists($attachment['tmp_name'])) {
+                        $mail->addAttachment($attachment['tmp_name'], $attachment['original_name']);
+                        error_log("Added attachment: " . $attachment['original_name']);
+                    }
                 }
             }
 
@@ -300,7 +343,6 @@ class GroupMailHandler
     {
         global $conn;
 
-        // FIXED: Removed the non-existent gm.created_by column reference
         $stmt = $conn->prepare("
             SELECT gc.id, gc.name as filter_signature, gc.created_at, gc.updated_at,
                    COUNT(gm.id) as email_count,

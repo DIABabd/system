@@ -238,7 +238,7 @@ if (!empty($authors)) {
     <script src="assets/js/notifications.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/navigation.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/filter-wizard.js?v=<?php echo time(); ?>"></script>
-    <script src="assets/js/filter-conversations.js?v=<?php echo time(); ?>"></script>
+    <script src="assets/js/group-conversations.js?v=<?php echo time(); ?>"></script>
 
     <!-- Initialize when document is ready -->
     <script>
