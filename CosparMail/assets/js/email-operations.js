@@ -188,5 +188,6 @@ function viewEmailDetails(emailId, type = 'regular') {
 }
 
 // Make sure these functions are globally available
+window.loadEmailHistory = loadEmailHistory;
 window.setupViewDetailsButtons = setupViewDetailsButtons;
 window.viewEmailDetails = viewEmailDetails;

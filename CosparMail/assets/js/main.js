@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function() {
     
     // Create and append script elements
     const scriptFiles = [
-        'author-management.js',
         'email-ui.js',
         'email-operations.js',
         'popup-handlers.js',

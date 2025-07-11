@@ -88,6 +88,7 @@ function generateSelectAllAuthorsCardHTML($authorCount)
 /**
  * Generate HTML for all author cards (including Select All card)
  * This replaces ALL instances of author card generation in the system
+ * i think this is only there to make the select all card appear first in the list 
  * 
  * @param array $authors Array of author data
  * @return string Complete HTML for all author cards
@@ -151,15 +152,5 @@ function validateAuthorData($author)
     }
 
     return $author;
-}
-
-/**
- * DEPRECATED - DO NOT USE
- * This function exists only to catch old usage and redirect to new function
- */
-function generateSimpleAuthorCard($author)
-{
-    error_log("WARNING: generateSimpleAuthorCard() is deprecated. Use generateAuthorCardHTML() instead.");
-    return generateAuthorCardHTML($author);
 }
 ?>

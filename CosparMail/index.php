@@ -231,7 +231,6 @@ if (!empty($authors)) {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <!-- Include JavaScript files directly -->
-    <script src="assets/js/author-management.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/email-ui.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/email-operations.js?v=<?php echo time(); ?>"></script>
     <script src="assets/js/popup-handlers.js?v=<?php echo time(); ?>"></script>
